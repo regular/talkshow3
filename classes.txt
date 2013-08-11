@@ -1,0 +1,74 @@
+Keybinding
+	emits yes, no and menu button events
+
+Navogation
+	intercepts keyboard events
+	uses a scanner
+	adds navigation board
+		either by messing with the datasource
+			on boeard_creation
+		or by instanciating a static board
+	plays navigation sounds
+	handles click events
+		calls Field:enter method
+		of
+		emits pop_board event
+	handles cursor events
+
+Crumbs
+	listens to push_board and pop_board
+	emits pop_board
+
+BoardStack
+	a stack of boards
+	push & pop
+
+Board
+	a grid of fields
+	consumes a datasource
+	uses a field factory
+	handles drag and drop for re-ordering of fields
+		yields/sortable
+
+CustomField
+	async loads its conttent
+	uses font awesome to display
+		symbol
+		nav sound icon
+		photo icon
+		audio icon
+
+	has enter() method
+	emits present_media event
+	
+	handles drop events
+	inline editing of title
+		adamsanderson/inline-edit 
+	two modes: edit/play
+
+SubBoardField extends CustomField
+	overrides enter()
+		emits push_board event
+
+Scanner
+	iterates over the Fields of a Board
+	emits scan events
+	state can be pushed/popped and reset
+	must be explicitly resumed after each iteratorn
+		(to allow for nav sounds of varzing duration)
+
+MediaPlayer
+	modal media player that listens for
+	yes, no, menu events
+
+Awesomee selector
+	displays a list of font awesome icons
+	search field
+		cayasso/list
+
+Symbol selector	
+	Awesomee selector + drop target for pngs and svg for custom symbols
+
+DataSource
+	uses leveldb API
+	possibly the hierarchy wrapper mentioned by dshaw

@@ -1,0 +1,18 @@
+extends ../../views/page
+include markup
+
+append styles
+    link(rel="stylesheet", type="text/css", href="board.css")
+
+append scripts
+    script(src="board.js")
+    
+    :coffeescript
+        Board = require 'board'
+        board = new Board('.content')
+    
+block body
+    
+    mixin markup
+    
+
